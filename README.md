@@ -1,4 +1,4 @@
-# Phishing Detector — Browser Extension
+# Phishing Detector (Browser Extension)
 
 A browser extension that detects phishing attempts in real time. Built with JavaScript and the Chrome/Edge Extension APIs (Manifest V3).
 
