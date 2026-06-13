@@ -15,12 +15,15 @@ A browser extension that detects phishing attempts in real time. Built with Java
 ---
 
 ## Project Structure
+
+```
 phishing-detector/
-├── manifest.json — Extension config (permissions, scripts, popup)
-├── background.js — Service worker: redirect tracking, badge updates
-├── content.js — Injected into every page: URL, form, redirect checks
-├── popup.html — Popup UI layout and styles
-└── popup.js — Popup logic: reads scan results, renders risk state
+├── manifest.json     — Extension config (permissions, scripts, popup)
+├── background.js     — Service worker: redirect tracking, badge updates
+├── content.js        — Injected into every page: URL, form, redirect checks
+├── popup.html        — Popup UI layout and styles
+└── popup.js          — Popup logic: reads scan results, renders risk state
+```
 
 
 ---
@@ -52,36 +55,38 @@ phishing-detector/
 3. Enable **Developer mode** (top right)
 4. Click **Load unpacked**
 5. Select the `phishing-detector/` folder
-6. Navigate to any website — the extension activates automatically
+6. Navigate to any website —> the extension activates automatically
 
 > After any code change: reload the extension at `edge://extensions`, then hard-refresh the page (`Ctrl + Shift + R`).
 
 ---
 
 ## How It Works
+
+```
 Page loads
-│
-▼
+    │
+    ▼
 content.js injects
-├── URL checks (synchronous)
-├── Form checks (synchronous)
-├── Meta refresh check(synchronous)
-└── Ask background.js for redirect warnings (async)
-│
-▼
-report() fires
-├── Writes results to chrome.storage.local
-└── Sends UPDATE_BADGE to background.js
-│
-▼
-background.js sets badge color + text
+    ├── URL checks             (synchronous)
+    ├── Form checks            (synchronous)
+    ├── Meta refresh check     (synchronous)
+    └── Ask background.js for redirect warnings (async)
+            │
+            ▼
+        report() fires
+            ├── Writes results to chrome.storage.local
+            └── Sends UPDATE_BADGE to background.js
+                        │
+                        ▼
+                background.js sets badge color + text
 
 User clicks icon
-│
-▼
+    │
+    ▼
 popup.js reads chrome.storage.local
-└── Renders risk level, threat bar, and warning list
-
+    └── Renders risk level, threat bar, and warning list
+```
 
 ---
 
@@ -106,7 +111,7 @@ popup.js reads chrome.storage.local
 
 ---
 
-## Why I build this?
+## Why I build this? Because I need to learn about:
 
 - Browser extension architecture (content scripts, service workers, popups)
 - Message passing between isolated extension contexts
@@ -119,7 +124,7 @@ popup.js reads chrome.storage.local
 ## Limitations
 
 - Does not query external threat intelligence APIs (e.g. Google Safe Browsing)
-- Brand list is static — can be expanded in `content.js`
+- Brand list is static —> can be expanded in `content.js`
 - Detection is heuristic-based, not ML-based
 - Does not inspect HTTPS certificate validity
 
