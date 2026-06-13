@@ -3,6 +3,14 @@
   "name": "Phishing Detector",
   "version": "1.0",
   "description": "Detects phishing attempts in real time",
+  "permissions": ["webNavigation", "tabs", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Phishing Detector"
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
